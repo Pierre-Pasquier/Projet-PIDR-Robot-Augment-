@@ -67,6 +67,8 @@ if __name__ == "__main__" :
     if cap.isOpened() == False : 
         print ("Unable to read camera feed" )
         sys.exit(0)
+    else :
+        print("normalement ça marche")
 
     width = cap.get(cv.CAP_PROP_FRAME_WIDTH)
     height= cap.get(cv.CAP_PROP_FRAME_HEIGHT)
