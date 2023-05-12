@@ -121,7 +121,7 @@ if __name__ == "__main__" :
     drawer = CircleDrawer()
     
     kernel = np.ones((3,3),np.uint8) # used below in erosion/dilatation
-    
+    print("début de la boucle")
     while True :
         counter += 1 
 
