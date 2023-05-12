@@ -128,7 +128,7 @@ if __name__ == "__main__" :
         print("2")
         # read a frame 
         ret, frame = cap.read()
-        print("3")
+        print(ret,frame)
         if ret != True:
             continue # if could not,  skip 
         print("4")
