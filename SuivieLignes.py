@@ -10,21 +10,23 @@ from time import sleep
 
 
 SuiviLigne=0
+Vitesse=100
+
 
 
 
 if #la position du récepteur à boule est basse alors:
-    th[node_id]["motor.left.speed"]=300
-    th[node_id]["motor.right.speed"]=300
+    th[node_id]["motor.left.target"]=Vitesse
+    th[node_id]["motor.right.target"]=Vitesse
 
 
     #on gere les murs avec le onevent et la couleur aus sol entre 400 et 600
     if th[node_id]["prox.ground.reflected"][0]> 400 and  th[node_id]["prox.ground.reflected"][0]< 600 :
-		    th[node_id]["motor.left.speed"]= 500
+		    th[node_id]["motor.left.target"]= Vitesse
 			sleep(2000)
 
     if th[node_id]["prox.ground.reflected"][1]> 400 and  th[node_id]["prox.ground.reflected"][1]< 600 :
-		    th[node_id]["motor.right.speed"]= 500
+		    th[node_id]["motor.right.target"]=Vitesse
 			sleep(2000)
 	
 
@@ -37,11 +39,11 @@ if #la position du récepteur à boule est basse alors:
 
 	    #on dévie à gauche
 	    if th[node_id]["prox.ground.reflected"][0]> 200 :
-		    th[node_id]["motor.left.speed"] = 500
+		    th[node_id]["motor.left.target"] = Vitesse*2
 	
 	    #on dévie à droite
 	    elif th[node_id]["prox.ground.reflected"][1]> 200 :
-	    	th[node_id]["motor.right.speed"] = 500
+	    	th[node_id]["motor.right.target"] = Vitesse*2
 
     #on est arrivé au bout de la ligne 
 	if th[node_id]["prox.ground.reflected"][0]> 200 and th[node_id]["prox.ground.reflected"][1]>200 and SuiviLigne==1:
@@ -56,16 +58,16 @@ if #la position du récepteur à boule est basse alors:
 #quand ou a pas la boule :
 
 if #la position du récepteur à boule est haute alors:
-    th[node_id]["motor.left.speed"]=300
-    th[node_id]["motor.right.speed"]=300
+    th[node_id]["motor.left.target"]=300
+    th[node_id]["motor.right.target"]=300
 
     #on gere les murs avec le onevent et la couleur aus sol entre 400 et 600
     if th[node_id]["prox.ground.reflected"][0]> 400 and  th[node_id]["prox.ground.reflected"][0]< 600 :
-		    th[node_id]["motor.left.speed"] = 500
+		    th[node_id]["motor.left.target"] = Vitesse*2
 			sleep(2000)
 
     if th[node_id]["prox.ground.reflected"][1]> 400 and  th[node_id]["prox.ground.reflected"][1]< 600 :
-		    th[node_id]["motor.right.speed"] = 500
+		    th[node_id]["motor.right.target"] = Vitesse*2
 			sleep(2000)
 		
 
@@ -76,38 +78,38 @@ if #la position du récepteur à boule est haute alors:
 
 		#si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
 	    if th[node_id]["prox.ground.reflected"][0]> 200  and th[node_id]["prox.ground.reflected"][0]<400 and th[node_id]["prox.ground.reflected"][1]< 200  or  th[node_id]["prox.ground.reflected"][1]> 400:       
-		    th[node_id]["motor.left.speed"] = 400
+		    th[node_id]["motor.left.target"] = Vitesse*2
 
 
 	    elif th[node_id]["prox.ground.reflected"][1]> 200  and  th[node_id]["prox.ground.reflected"][1]< 400 and th[node_id]["prox.ground.reflected"][0]< 200  or th[node_id]["prox.ground.reflected"][0]> 400 :
-		    th[node_id]["motor.right.speed"] = 400
+		    th[node_id]["motor.right.target"] = Vitesse*2
 
 
 
 		#si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
 	    elif th[node_id]["prox.ground.reflected"][0]<200 :
-			th[node_id]["motor.left.speed"] = 400
+			th[node_id]["motor.left.target"] = Vitesse*2
 			sleep(1000)
 			#si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
 			if th[node_id]["prox.ground.reflected"][0]<200 and th[node_id]["prox.ground.reflected"][1]<200 :
 				while #on detecte pas de balle :
-					th[node_id]["motor.left.speed"] = 100
-					th[node_id]["motor.right.speed"] = 100
+					th[node_id]["motor.left.target"] = Vitesse
+					th[node_id]["motor.right.target"] = Vitesse
 			else :
-				th[node_id]["motor.right.speed"] = 400
+				th[node_id]["motor.right.target"] = Vitesse*2
 				sleep(2000)
 		    #on se dirige vers la boule et une fois qu’on l’a on passe en mode recherche de ligne noires
 
 
 		#si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
 	    elif th[node_id]["prox.ground.reflected"][1]<200 :
-			th[node_id]["motor.right.speed"] = 400
+			th[node_id]["motor.right.target"] = Vitesse*2
 			sleep(1000)
 			#si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
 			if th[node_id]["prox.ground.reflected"][0]<200 and th[node_id]["prox.ground.reflected"][1]<200 :
-					th[node_id]["motor.left.speed"] = 100
-					th[node_id]["motor.right.speed"] = 100
+					th[node_id]["motor.left.target"] =Vitesse
+					th[node_id]["motor.right.target"] = Vitesse
 			else :
-				th[node_id]["motor.left.speed"] = 400
+				th[node_id]["motor.left.target"] =Vitesse*2
 				sleep(2000)
 		    #on se dirige vers la boule et une fois qu’on l’a on passe en mode recherche de ligne noires
