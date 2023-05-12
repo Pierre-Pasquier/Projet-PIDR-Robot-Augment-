@@ -1,9 +1,9 @@
 import sys, time, math
 import RPi.GPIO as GPIO
 from collections import deque
-#import thymiodirect
-#from thymiodirect import Connection
-#from thymiodirect import Thymio
+import thymiodirect
+from thymiodirect import Connection
+from thymiodirect import Thymio
 
 import numpy as np
 
@@ -28,20 +28,24 @@ class FPS(object):  # à voir si on garde
 def nothing(*arg):  # used as a call back for GUIq
     pass
 
-def avancer(node_id,vitesse):
+def avancer(node_id):
+    global vitesse
     th[node_id]["motor.left.target"] = vitesse
     th[node_id]["motor.right.target"] = vitesse
 
-def tourner_droite(node_id,vitesse):
+def tourner_droite(node_id):
+    global vitesse
     th[node_id]["motor.left.target"] = vitesse
     th[node_id]["motor.right.target"] = -vitesse #valeur potentiellement à modifier
 
 
-def tourner_gauche(node_id,vitesse):
+def tourner_gauche(node_id):
+    global vitesse
     th[node_id]["motor.left.target"] = -vitesse #valeur potentiellement à modifier
     th[node_id]["motor.right.target"] = vitesse
 
 def attraper_balle():
+    global balle
     GPIO.output(Forward,GPIO.HIGH)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
@@ -50,6 +54,7 @@ def attraper_balle():
     balle = 1
 
 def relacher_balle():
+    global balle
     GPIO.output(Forward,GPIO.LOW)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
@@ -73,19 +78,18 @@ GPIO.setup(Backward, GPIO.OUT)
 
 
 # initialisation pour thymio
-#port = Connection.serial(Connection.serial_ports()[0])
+port = "/dev/ttyACM0"
 
-#th = Thymio(serial_port=port, on_connect=lambda node_id:print(f"{node_id} is connected"))
+th = Thymio(serial_port=port, on_connect=lambda node_id:print(f"{node_id} is connected"))
 
-#th.connect()
+th.connect()
 
-#id = th.first_node()
+node_id = th.first_node()
 
 
 if __name__ == "__main__":
     print("openCV version {}".format(cv.__version__))
     # print(cv.getBuildInformation())
-
     # Create a VideoCapture object
     cap = cv.VideoCapture(0)
 
@@ -135,6 +139,7 @@ if __name__ == "__main__":
 
         # read a frame
         ret, frame = cap.read()
+        print(frame[0][0])
         if ret != True:
             continue  # if could not,  skip
 
@@ -193,31 +198,38 @@ if __name__ == "__main__":
 
 
                 #Si balle dans zone collecteur
-                if len(frame) * 0.25 < x < len(frame) * 0.75 and len(frame[0]) * 0.75 < y < len(frame[0]) * 1 and balle == 0 :  # valeurs à tester
-                    attraper_balle()
+                partition = 15
+                for k in range(1,partition):
+                    pix_rouge_bas = frame[len(frame)-5][k*len(frame[0])//partition-1][2]
+                    pix_vert_bas = frame[len(frame)-5][k*len(frame[0])//partition-1][1]
+                    pix_bleu_bas = frame[len(frame)-5][k*len(frame[0])//partition-1][0]
+                    if pix_rouge_bas > 1.7 * pix_vert_bas and pix_rouge_bas > 1.7 * pix_bleu_bas : #and balle == 0 :  # valeurs à tester
+                        #attraper_balle()
+                        #balle = 1
+                        break
 
                 #Si balle droit devant
-                elif len(frame)*0.45 < x < len(frame)*0.55 and balle == 0 :  #valeurs à tester
-                    #th.set_variable_observer(id, avancer)
+                if len(frame[0])*0.40 < x < len(frame[0])*0.60 : #and balle == 0 :  #valeurs à tester
+                    th.set_variable_observer(id, avancer)
                     print("On avance, on avance, on avance, on avance,on avance,on avance,on avance,on avance,on avance,on avance ")
 
                 #si balle à gauche
-                elif x < len(frame)*0.45 and balle == 0 :
-                    #th.set_variable_observer(id, tourner_gauche)
+                elif x < len(frame[0])*0.40 : #and balle == 0 :
+                    th.set_variable_observer(id, tourner_gauche)
                     print("à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche")
 
                 #si balle à droite
-                elif x > len(frame)*0.55 and balle == 0 :
-                    #th.set_variable_observer(id, tourner_droite)
+                elif x > len(frame[0])*0.60 : #and balle == 0 :
+                    th.set_variable_observer(id, tourner_droite)
                     print("à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite")
 
             else:
                 old_circle = np.zeros((1, 3))
                 print(None, None, None)
 
-                #th.set_variable_observer(id, tourner_droite)
+                th.set_variable_observer(id, tourner_droite)
                 print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
 
-            print(frame[0][0])
+
 
 
