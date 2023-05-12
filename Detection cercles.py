@@ -123,15 +123,17 @@ if __name__ == "__main__" :
     kernel = np.ones((3,3),np.uint8) # used below in erosion/dilatation
     print("début de la boucle")
     while True :
-        counter += 1 
-
+        print("1")
+        counter += 1
+        print("2")
         # read a frame 
         ret, frame = cap.read()
+        print("3")
         if ret != True:
             continue # if could not,  skip 
-   
+        print("4")
         output = frame.copy()
-
+        print("5")
         #
         # Preprocessing 
         #
@@ -142,7 +144,7 @@ if __name__ == "__main__" :
         gray = cv.adaptiveThreshold(gray, 255,\
                                     cv.ADAPTIVE_THRESH_GAUSSIAN_C,\
                                     cv.THRESH_BINARY, 11, 3.5)
-	
+
         
         gray = cv.erode(gray, kernel, iterations=1)
         gray = cv.dilate(gray, kernel, iterations=1)
