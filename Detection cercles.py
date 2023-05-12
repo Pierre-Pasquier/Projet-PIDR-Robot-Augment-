@@ -150,7 +150,9 @@ if __name__ == "__main__" :
         #
         # hough
         #
+        print("pré-traitement fini")
         if counter % work_freq == 0 :
+            print("dans le if")
             counter = 0
            
             # read GUI values
@@ -179,7 +181,8 @@ if __name__ == "__main__" :
                                           maxRadius=max_rad )
 
             facteur_couleur = 0,1
-            # compare to the previoussly detected circle 
+            # compare to the previoussly detected circle
+            print("avant if 2")
             if  circles_det is not None :
                 circles_det = circles_det[0]
                 diff = (circles_det - old_circle)**2
