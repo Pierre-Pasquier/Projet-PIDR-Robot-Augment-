@@ -86,47 +86,9 @@ if __name__ == "__main__":
         print("Unable to read camera feed")
         sys.exit(0)
 
-    width = cap.get(cv.CAP_PROP_FRAME_WIDTH)
-    height = cap.get(cv.CAP_PROP_FRAME_HEIGHT)
-
-    #
-    # hough parameters
-    #
-    #
-    diag = math.sqrt(width ** 2 + height ** 2)  # image diagonal
-    dist = 10000  # distance between 2 hugh circles
-    min_rad = 0  # min and max of considered circles
-    max_rad = 70
-    dmax = 0  # min distance between 2 circles
-    dchange = 0  # max distance between old and new circle
-    hough_param_1 = 1  # see https://docs.opencv.org/4.5.1/dd/d1a/group__imgproc__feature.html#ga47849c3be0d0406ad3ca45db65a25d2d
-    hough_param_2 = 1
-
-    # Main loop
-    #
-    #
-    old_circle = np.zeros((1, 3))
-    min_circle = np.zeros((1, 3))
-    max_circle = np.zeros((1, 3))
-    min_circle[0][0] = int(width / 2)
-    min_circle[0][1] = int(height / 2)
-    min_circle[0][2] = int(min_rad)
-    max_circle[0][0] = int(width / 2)
-    max_circle[0][1] = int(height / 2)
-    max_circle[0][2] = int(max_rad)
-
-
-    counter = 0
-    work_freq = 1  # process every work_freq  frame
-
-    fps = FPS()
-    writer = TextWriter()
-    drawer = CircleDrawer()
-
-    kernel = np.ones((3, 3), np.uint8)  # used below in erosion/dilatation
+    
 
     while True:
-        counter += 1
         taille_j = 20
         taille_k = 20
         # read a frame
