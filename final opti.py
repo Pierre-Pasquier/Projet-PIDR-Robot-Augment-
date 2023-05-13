@@ -110,70 +110,70 @@ def __call__(self, img, text, pos=(40, 40)):
         if ret != True:
             continue
 
-    output = frame.copy()
+        output = frame.copy()
 
-    # Prétraitement de l'image
-    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    gray = cv.GaussianBlur(gray, (5, 5), 0)
-    gray = cv.medianBlur(gray, 5)
-    gray = cv.erode(gray, kernel, iterations=1)
-    gray = cv.dilate(gray, kernel, iterations=1)
+        # Prétraitement de l'image
+        gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+        gray = cv.GaussianBlur(gray, (5, 5), 0)
+        gray = cv.medianBlur(gray, 5)
+        gray = cv.erode(gray, kernel, iterations=1)
+        gray = cv.dilate(gray, kernel, iterations=1)
 
-    # Détection de cercles
-    circles = cv.HoughCircles(
-        gray,
-        cv.HOUGH_GRADIENT,
-        dp=1,
-        minDist=MIN_DISTANCE,
-        param1=PARAM1,
-        param2=PARAM2,
-        minRadius=min_circle[2],
-        maxRadius=max_circle[2],
-    )
+        # Détection de cercles
+        circles = cv.HoughCircles(
+            gray,
+            cv.HOUGH_GRADIENT,
+            dp=1,
+            minDist=MIN_DISTANCE,
+            param1=PARAM1,
+            param2=PARAM2,
+            minRadius=min_circle[2],
+            maxRadius=max_circle[2],
+        )
 
-    # Si des cercles sont détectés
-    if circles is not None:
-        circles = np.round(circles[0, :]).astype("int")
+        # Si des cercles sont détectés
+        if circles is not None:
+            circles = np.round(circles[0, :]).astype("int")
 
-        # Filtrage des cercles similaires aux précédents
-        if old_circle.shape[0] > 0:
-            diff = np.abs(circles - old_circle)
-            mask = np.sum(diff, axis=1) > MAX_DIFFERENCE
-            circles = circles[mask, :]
+            # Filtrage des cercles similaires aux précédents
+            if old_circle.shape[0] > 0:
+                diff = np.abs(circles - old_circle)
+                mask = np.sum(diff, axis=1) > MAX_DIFFERENCE
+                circles = circles[mask, :]
 
-        # Si des cercles sont toujours présents après filtrage
-        if circles.shape[0] > 0:
-            # Mise à jour des cercles précédents
-            old_circle = circles
+            # Si des cercles sont toujours présents après filtrage
+            if circles.shape[0] > 0:
+                # Mise à jour des cercles précédents
+                old_circle = circles
 
-            # Sélection du cercle le plus grand
-            idx = np.argmax(circles[:, 2])
-            circle = circles[idx]
+                # Sélection du cercle le plus grand
+                idx = np.argmax(circles[:, 2])
+                circle = circles[idx]
 
-            # Récupération des coordonnées du cercle
-            x, y, r = circle
+                # Récupération des coordonnées du cercle
+                x, y, r = circle
 
-            # Dessin du cercle et de la boîte englobante
-            drawer(output, circle, color=(0, 255, 0), thickness=4, bbox=True)
+                # Dessin du cercle et de la boîte englobante
+                drawer(output, circle, color=(0, 255, 0), thickness=4, bbox=True)
 
-            # Vérification si le cercle correspond à une balle
-            if r > BALL_RADIUS_THRESHOLD:
-                # Si la balle n'a pas encore été attrapée
-                if balle == 0:
-                    grab_ball()
-            else:
-                # Si la balle a été attrapée et le cercle est plus petit
-                if balle == 1:
-                    release_ball()
+                # Vérification si le cercle correspond à une balle
+                if r > BALL_RADIUS_THRESHOLD:
+                    # Si la balle n'a pas encore été attrapée
+                    if balle == 0:
+                        grab_ball()
+                else:
+                    # Si la balle a été attrapée et le cercle est plus petit
+                    if balle == 1:
+                        release_ball()
 
-    # Affichage de l'image et du texte
-    writer(output, f"Counter: {counter}")
-    cv.imshow("Output", output)
-    fps.update()
+        # Affichage de l'image et du texte
+        writer(output, f"Counter: {counter}")
+        cv.imshow("Output", output)
+        fps.update()
 
-    # Sortie si la touche 'q' est pressée
-    if cv.waitKey(1) & 0xFF == ord("q"):
-        break
+        # Sortie si la touche 'q' est pressée
+        if cv.waitKey(1) & 0xFF == ord("q"):
+            break
 
     fps.stop()
     cap.release()
