@@ -86,7 +86,6 @@ if __name__ == "__main__":
         print("Unable to read camera feed")
         sys.exit(0)
 
-    
 
     while True:
         taille_j = 20
@@ -104,28 +103,32 @@ if __name__ == "__main__":
                     x = (j//taille_j)*V-1
                     y = k*len(frame[0])//taille_k-1
                     break
+                else :
+                    x = None
+                    y = None
 
 
-                if len(frame[0])*0.40 < x < len(frame[0])*0.60 : #and balle == 0 :  #valeurs à tester
-                    th.set_variable_observer(id, avancer)
-                    print("On avance, on avance, on avance, on avance,on avance,on avance,on avance,on avance,on avance,on avance ")
+        if x != None :
+            if len(frame[0])*0.40 < x < len(frame[0])*0.60 : #and balle == 0 :  #valeurs à tester
+                th.set_variable_observer(id, avancer)
+                print("On avance, on avance, on avance, on avance,on avance,on avance,on avance,on avance,on avance,on avance ")
 
-                #si balle à gauche
-                elif x < len(frame[0])*0.40 : #and balle == 0 :
-                    th.set_variable_observer(id, tourner_gauche)
-                    print("à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche")
+            #si balle à gauche
+            elif x < len(frame[0])*0.40 : #and balle == 0 :
+                th.set_variable_observer(id, tourner_gauche)
+                print("à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche")
 
-                #si balle à droite
-                elif x > len(frame[0])*0.60 : #and balle == 0 :
-                    th.set_variable_observer(id, tourner_droite)
-                    print("à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite")
-
-            else:
-                old_circle = np.zeros((1, 3))
-                print(None, None, None)
-
+            #si balle à droite
+            elif x > len(frame[0])*0.60 : #and balle == 0 :
                 th.set_variable_observer(id, tourner_droite)
-                print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
+                print("à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite")
+
+        else :
+            old_circle = np.zeros((1, 3))
+            print(None, None, None)
+
+            th.set_variable_observer(id, tourner_droite)
+            print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
 
 
 
