@@ -167,6 +167,9 @@ if __name__ == "__main__":
     counter = 0
     work_freq = 1  # process every work_freq  frame
 
+    fps = FPS()
+    writer = TextWriter()
+    drawer = CircleDrawer()
 
     kernel = np.ones((3, 3), np.uint8)  # used below in erosion/dilatation
 
