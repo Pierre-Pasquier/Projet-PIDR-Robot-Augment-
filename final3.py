@@ -102,6 +102,7 @@ if __name__ == "__main__":
                 if pix_rouge_bas > 1.7 * pix_vert_bas and pix_rouge_bas > 1.7 * pix_bleu_bas : #and balle == 0 :  # valeurs à tester
                     x = (j//taille_j)*V-1
                     y = k*len(frame[0])//taille_k-1
+                    print(x,y)
                     break
                 else :
                     x = None
