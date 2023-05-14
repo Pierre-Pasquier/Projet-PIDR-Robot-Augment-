@@ -54,10 +54,10 @@ def test(node_id):
 			
 			DepartLigneNoire += 1
 			if DepartLigneNoire == 1:
-				th[node_id]["motor.left.target"] = 20
-				th[node_id]["motor.right.target"] = -20
+				th[node_id]["motor.left.target"] = 30
+				th[node_id]["motor.right.target"] = -30
 				print("aaaaaaaaaaaaaa")
-				sleep(1)
+				sleep(3)
 			
 			print(th[node_id]["prox.ground.reflected"][0])
 			#moyen de savoir qu'on viens d'une ligne 
