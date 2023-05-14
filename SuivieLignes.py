@@ -31,7 +31,7 @@ ligne_grise = 0
 DepartLigneNoire = 0
 
 def test(node_id):
-	global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise
+	global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire
 	print(th[node_id]["prox.ground.reflected"][0])
 	if balle == 1 : #la position du récepteur à boule est basse alors:
 		th[node_id]["motor.left.target"]=Vitesse
