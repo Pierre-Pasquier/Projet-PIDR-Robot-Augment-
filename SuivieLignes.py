@@ -55,6 +55,7 @@ def test(node_id):
 			DepartLigneNoire += 1
 			if DepartLigneNoire == 1:
 				th[node_id]["motor.left.target"] = Vitesse
+				print("aaaaaaaaaaaaaa")
 				sleep(1)
 			
 			print(th[node_id]["prox.ground.reflected"][0])
