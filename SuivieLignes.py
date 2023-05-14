@@ -54,7 +54,7 @@ def test(node_id):
 			
 			DepartLigneNoire += 1
 			if DepartLigneNoire == 1:
-				th[node_id]["motor.left.target"] = Vitesse
+				th[node_id]["motor.left.target"] = 20
 				print("aaaaaaaaaaaaaa")
 				sleep(1)
 			
