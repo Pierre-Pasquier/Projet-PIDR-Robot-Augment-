@@ -64,52 +64,67 @@ def nothing(*arg):  # used as a call back for GUIq
     pass
 
 def avancer(node_id):
-    global vitesse
-    th[node_id]["motor.left.target"] = vitesse
-    th[node_id]["motor.right.target"] = vitesse
+    global vitesse_avance
+    th[node_id]["motor.left.target"] = vitesse_avance
+    th[node_id]["motor.right.target"] = vitesse_avance
 
 def tourner_droite(node_id):
-    global vitesse
-    th[node_id]["motor.left.target"] = vitesse
-    th[node_id]["motor.right.target"] = -vitesse #valeur potentiellement à modifier
+    global vitesse_tourne
+    th[node_id]["motor.left.target"] = vitesse_tourne
+    th[node_id]["motor.right.target"] = 0 #valeur potentiellement à modifier
 
 
 def tourner_gauche(node_id):
-    global vitesse
-    th[node_id]["motor.left.target"] = -vitesse #valeur potentiellement à modifier
-    th[node_id]["motor.right.target"] = vitesse
+    global vitesse_tourne
+    th[node_id]["motor.left.target"] = 0 #valeur potentiellement à modifier
+    th[node_id]["motor.right.target"] = vitesse_tourne
+
+def on():
+    GPIO.output(Switch, GPIO.HIGH)
+def off():
+    GPIO.output(Switch, GPIO.LOW)
+
+
 
 def attraper_balle():
     global balle
+    on()
     GPIO.output(Forward,GPIO.HIGH)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
     GPIO.output(Forward,GPIO.LOW)
     GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
     balle = 1
+    off()
 
 def relacher_balle():
     global balle
+    on()
     GPIO.output(Forward,GPIO.LOW)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
     GPIO.output(Forward,GPIO.HIGH)
     GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
     balle = 0
+    off()
 
 
 # initialisation pour electro-aimant
 
-mode = GPIO.getmode()
-
-GPIO.cleanup()
-
-Forward = 26
-Backward = 20
+mode=GPIO.getmode()
+#GPIO.cleanup()
+Forward=26
+Backward=20
+Switch=16
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(Forward, GPIO.OUT)
 GPIO.setup(Backward, GPIO.OUT)
+GPIO.setup(Switch, GPIO.OUT)
+
+
+
+
 
 
 # initialisation pour thymio
@@ -121,7 +136,8 @@ th.connect()
 
 id = th.first_node()
 
-vitesse = 20
+vitesse_avance = 20
+vitesse_tourne = 5
 
 if __name__ == "__main__":
     print("openCV version {}".format(cv.__version__))
@@ -227,47 +243,43 @@ if __name__ == "__main__":
                 pix_rouge = frame[int(circles_det[0][1])][int(circles_det[0][0])][2]
                 pix_vert = frame[int(circles_det[0][1])][int(circles_det[0][0])][1]
                 pix_bleu = frame[int(circles_det[0][1])][int(circles_det[0][0])][0]
-                if n_diff > dmax ** 2 and pix_rouge > 1.7 * pix_vert and pix_rouge > 1.7 * pix_bleu:
+                if n_diff > dmax ** 2  and pix_rouge > 1.5 * pix_vert and pix_rouge > 1.5 * pix_bleu:
                     old_circle = circles_det
+                    x = circles_det[0][0]
+                    y = circles_det[0][1]
+                    r = circles_det[0][2]
+		    #Si balle droit devant
+                    if len(frame[0])*0.40 < x < len(frame[0])*0.60 : #and balle == 0 :  #valeurs à tester
+                        th.set_variable_observer(id, avancer)
+                        print("On avance, on avance, on avance, on avance,on avance,on avance,on avance,on avance,on avance,on avance ")
+       #si balle à gauche
+                    elif x < len(frame[0])*0.40 : #and balle == 0 :
+                        th.set_variable_observer(id, tourner_gauche)
+                        print("à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche")
 
-                x = circles_det[0][0]
-                y = circles_det[0][1]
-                r = circles_det[0][2]
+		        #si balle à droite
+                    elif x > len(frame[0])*0.60 : #and balle == 0 :
+                        th.set_variable_observer(id, tourner_droite)
+                        print("à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite")
+
+                    else:
+                        old_circle = np.zeros((1, 3))
+                        print(None, None, None)
+                        th.set_variable_observer(id, tourner_droite)
+                        print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
 
 
-
-                #Si balle dans zone collecteur
+#Si balle dans zone collecteur
                 partition = 15
                 for k in range(1,partition):
-                    pix_rouge_bas = frame[len(frame)-5][k*len(frame[0])//partition-1][2]
-                    pix_vert_bas = frame[len(frame)-5][k*len(frame[0])//partition-1][1]
-                    pix_bleu_bas = frame[len(frame)-5][k*len(frame[0])//partition-1][0]
+                    pix_rouge_bas = frame[len(frame)-30][k*len(frame[0])//partition-1][2]
+                    pix_vert_bas = frame[len(frame)-30][k*len(frame[0])//partition-1][1]
+                    pix_bleu_bas = frame[len(frame)-30][k*len(frame[0])//partition-1][0]
                     if pix_rouge_bas > 1.7 * pix_vert_bas and pix_rouge_bas > 1.7 * pix_bleu_bas : #and balle == 0 :  # valeurs à tester
-                        #attraper_balle()
+                        attraper_balle()
                         #balle = 1
                         break
 
-                #Si balle droit devant
-                if len(frame[0])*0.40 < x < len(frame[0])*0.60 : #and balle == 0 :  #valeurs à tester
-                    th.set_variable_observer(id, avancer)
-                    print("On avance, on avance, on avance, on avance,on avance,on avance,on avance,on avance,on avance,on avance ")
-
-                #si balle à gauche
-                elif x < len(frame[0])*0.40 : #and balle == 0 :
-                    th.set_variable_observer(id, tourner_gauche)
-                    print("à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche, à gauche")
-
-                #si balle à droite
-                elif x > len(frame[0])*0.60 : #and balle == 0 :
-                    th.set_variable_observer(id, tourner_droite)
-                    print("à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite")
-
-            else:
-                old_circle = np.zeros((1, 3))
-                print(None, None, None)
-
-                th.set_variable_observer(id, tourner_droite)
-                print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
         drawer(output, old_circle)
 
         writer(output, "Fps={:06.2f}".format(fps()))
