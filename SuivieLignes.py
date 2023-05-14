@@ -93,9 +93,9 @@ def attraper_balle():
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
     GPIO.output(Forward,GPIO.LOW)
-    GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
     balle = 1
     off()
+    GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
 
 def relacher_balle():
     global balle
