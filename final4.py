@@ -361,7 +361,7 @@ while True:
             hough_param_2 = max(hough_param_2, 1)
 
             # detect
-            circles = cv.HoughCircles(gray, cv.HOUGH_GRADIENT,
+            circles_det = cv.HoughCircles(gray, cv.HOUGH_GRADIENT,
                                           2,
                                           dist,
                                           param1=hough_param_1,
@@ -371,13 +371,13 @@ while True:
 
             facteur_couleur = 0.1
             # compare to the previoussly detected circle
-            if circles is not None:
-                for circle in circles:
+            if circles_det is not None:
+                for circle in circles_det:
                     drawer(output, circle)
 
                     writer(output, "Fps={:06.2f}".format(fps()))
                     cv.imshow('frame', output)
-                circles_det = circles[0]
+                circles_det = circles_det[0]
                 balle_detectee = 1
                 print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 circles_det = circles_det[0]
