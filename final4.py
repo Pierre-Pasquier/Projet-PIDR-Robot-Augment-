@@ -233,13 +233,13 @@ def recherche(node_id):
 
 def detect_circles(frame):
     # Conversion en niveaux de gris
-    gray = cv.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
     # Réduction du bruit avec un flou gaussien
     blur = cv.GaussianBlur(gray, (5, 5), 0)
 
     # Détection des cercles avec la transformée de Hough
-    circles = cv.HoughCircles(blur, cv2.HOUGH_GRADIENT, dp=1, minDist=1000000, param1=50, param2=30, minRadius=0, maxRadius=100)
+    circles = cv.HoughCircles(blur, cv.HOUGH_GRADIENT, dp=1, minDist=1000000, param1=50, param2=30, minRadius=0, maxRadius=100)
 
     facteur_couleur = 0.1
             # compare to the previoussly detected circle
