@@ -338,8 +338,8 @@ th.connect()
 
 id = th.first_node()
 
-vitesse_avance = 20
-vitesse_tourne = 5
+vitesse_avance = 50
+vitesse_tourne = 20
 
 balle = 0
 
