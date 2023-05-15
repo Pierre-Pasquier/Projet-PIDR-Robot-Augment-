@@ -262,8 +262,10 @@ vitesse_tourne = 5
 
 balle = 0
 
+
 while True:
     active_cam = 0
+    balle_detectee = 0
     print("openCV version {}".format(cv.__version__))
     # print(cv.getBuildInformation())
     # Create a VideoCapture object
@@ -360,6 +362,7 @@ while True:
             facteur_couleur = 0.1
             # compare to the previoussly detected circle
             if circles_det is not None:
+		balle_detectee = 1
                 circles_det = circles_det[0]
                 diff = (circles_det - old_circle) ** 2
                 n_diff = np.sum(diff)
@@ -391,7 +394,7 @@ while True:
                         print(None, None, None)
                         th.set_variable_observer(id, tourner_droite)
                         print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
-                else :
+                elif balle_detectee == 0 :
                     th.set_variable_observer(id, tourner_droite)
 
 #Si balle dans zone collecteur
