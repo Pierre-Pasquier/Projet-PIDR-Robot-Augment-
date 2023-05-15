@@ -249,7 +249,7 @@ def recherche(node_id):
 # initialisation pour electro-aimant
 
 mode=GPIO.getmode()
-#GPIO.cleanup()
+GPIO.cleanup()
 
 
 
