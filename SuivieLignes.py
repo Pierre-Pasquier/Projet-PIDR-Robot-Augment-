@@ -88,25 +88,41 @@ def off():
 
 def attraper_balle():
     global balle
+    Forward=26
+    Backward=20
+    Switch=16
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(Forward, GPIO.OUT)
+    GPIO.setup(Backward, GPIO.OUT)
+    GPIO.setup(Switch, GPIO.OUT)
     on()
     GPIO.output(Forward,GPIO.HIGH)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
     GPIO.output(Forward,GPIO.LOW)
     balle = 1
-    #GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
     off()
+    GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
 
 def relacher_balle():
     global balle
+    Forward=26
+    Backward=20
+    Switch=16
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(Forward, GPIO.OUT)
+    GPIO.setup(Backward, GPIO.OUT)
+    GPIO.setup(Switch, GPIO.OUT)
     on()
     GPIO.output(Forward,GPIO.LOW)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
     GPIO.output(Forward,GPIO.HIGH)
-    #GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
     balle = 0
     off()
+    GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
 
 
 
@@ -234,14 +250,7 @@ def recherche(node_id):
 
 mode=GPIO.getmode()
 #GPIO.cleanup()
-Forward=26
-Backward=20
-Switch=16
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(Forward, GPIO.OUT)
-GPIO.setup(Backward, GPIO.OUT)
-GPIO.setup(Switch, GPIO.OUT)
 
 
 
