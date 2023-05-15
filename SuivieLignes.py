@@ -417,7 +417,7 @@ while True:
 
     if balle == 1 :
 
-        while !active_cam :
+        while not active_cam :
             th.set_variable_observer(node_id,retour)
 
 
