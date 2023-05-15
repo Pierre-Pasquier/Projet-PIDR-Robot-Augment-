@@ -398,7 +398,7 @@ while True:
                         th.set_variable_observer(id, tourner_droite)
                         print("à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite, à droite")
 
-                    else:
+                    elif balle_detectee == 0 :
                         old_circle = np.zeros((1, 3))
                         print(None, None, None)
                         th.set_variable_observer(id, tourner_droite)
