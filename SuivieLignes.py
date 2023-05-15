@@ -361,7 +361,7 @@ while True:
             facteur_couleur = 0.1
             # compare to the previoussly detected circle
             if circles_det is not None:
-		balle_detectee = 1
+                balle_detectee = 1
                 circles_det = circles_det[0]
                 diff = (circles_det - old_circle) ** 2
                 n_diff = np.sum(diff)
