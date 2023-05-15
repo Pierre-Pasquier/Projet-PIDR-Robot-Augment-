@@ -403,7 +403,7 @@ while True:
                         print(None, None, None)
                         th.set_variable_observer(id, tourner_droite)
                         print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
-                elif balle_detectee == 0 :
+            elif balle_detectee == 0 :
                     th.set_variable_observer(id, tourner_droite)
 
 #Si balle dans zone collecteur
