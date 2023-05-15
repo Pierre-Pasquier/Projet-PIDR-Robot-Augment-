@@ -112,7 +112,7 @@ def relacher_balle():
 
 
 def retour(node_id):
-    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire
+    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse
     print(th[node_id]["prox.ground.reflected"][0])
 
     th[node_id]["motor.left.target"]=Vitesse
@@ -171,7 +171,7 @@ def retour(node_id):
 
 def recherche(node_id):
 	#quand ou a pas la boule :
-    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,active_cam
+    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,active_cam,Vitesse
 
 
     th[node_id]["motor.left.target"]=Vitesse
