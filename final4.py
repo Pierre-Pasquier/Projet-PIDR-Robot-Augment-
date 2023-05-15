@@ -159,8 +159,12 @@ def retour(node_id):
         DepartLigneNoire = 0
         print("On pose la balle")
         balle = 0
-        th[node_id]["motor.left.target"] = 200
-        th[node_id]["motor.right.target"] = -200
+        if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1]
+            th[node_id]["motor.left.target"] = -200
+            th[node_id]["motor.right.target"] = 200
+        else :
+            th[node_id]["motor.left.target"] = 200
+            th[node_id]["motor.right.target"] = -200
 
         sleep(1)
         #on dépose la boule
