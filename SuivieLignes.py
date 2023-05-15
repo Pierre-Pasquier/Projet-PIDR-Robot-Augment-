@@ -261,6 +261,7 @@ vitesse_tourne = 5
 
 balle = 0
 
+Vitesse = 30
 
 while True:
     active_cam = 0
