@@ -257,9 +257,9 @@ def detect_circles(frame):
         print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         circles_det = circles
         print(circles_det[0][0], circles_det[0][1], circles_det[0][2])  # x,y,r
-        pix_rouge = frame[int(circles_det[0][1])][int(circles_det[0][0])][2]
-        pix_vert = frame[int(circles_det[0][1])][int(circles_det[0][0])][1]
-        pix_bleu = frame[int(circles_det[0][1])][int(circles_det[0][0])][0]
+        pix_rouge = frame[int(circles_det[0][1])-1][int(circles_det[0][0])-1][2]
+        pix_vert = frame[int(circles_det[0][1])-1][int(circles_det[0][0])-1][1]
+        pix_bleu = frame[int(circles_det[0][1])-1][int(circles_det[0][0])-1][0]
         if  pix_rouge > 1.5 * pix_vert and pix_rouge > 1.5 * pix_bleu:
             x = circles_det[0][0]
             y = circles_det[0][1]
