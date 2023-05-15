@@ -294,8 +294,6 @@ def detect_circles(frame):
                 break
     elif balle_detectee == 0 :
         th.set_variable_observer(id, tourner_droite)
-    else :
-        th.set_variable_observer(id, tourner_droite)
         active_cam = 1
 
     return frame
