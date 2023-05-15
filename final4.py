@@ -256,14 +256,11 @@ def detect_circles(frame):
         balle_detectee = 1
         print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         circles_det = circles[0]
-        diff = (circles_det - old_circle) ** 2
-        n_diff = np.sum(diff)
         print(circles_det[0][0], circles_det[0][1], circles_det[0][2])  # x,y,r
         pix_rouge = frame[int(circles_det[0][1])][int(circles_det[0][0])][2]
         pix_vert = frame[int(circles_det[0][1])][int(circles_det[0][0])][1]
         pix_bleu = frame[int(circles_det[0][1])][int(circles_det[0][0])][0]
-        if n_diff > dmax ** 2  and pix_rouge > 1.5 * pix_vert and pix_rouge > 1.5 * pix_bleu:
-            old_circle = circles_det
+        if  pix_rouge > 1.5 * pix_vert and pix_rouge > 1.5 * pix_bleu:
             x = circles_det[0][0]
             y = circles_det[0][1]
             r = circles_det[0][2]
