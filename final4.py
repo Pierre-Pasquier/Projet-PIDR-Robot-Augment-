@@ -372,7 +372,7 @@ while True:
             facteur_couleur = 0.1
             # compare to the previoussly detected circle
             if circles is not None:
-                for circle in circles_det:
+                for circle in circles:
                     drawer(output, circle)
 
                     writer(output, "Fps={:06.2f}".format(fps()))
