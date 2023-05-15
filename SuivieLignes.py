@@ -392,7 +392,7 @@ while True:
                         th.set_variable_observer(id, tourner_droite)
                         print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
                 else :
-		    th.set_variable_observer(id, tourner_droite)
+                    th.set_variable_observer(id, tourner_droite)
 
 #Si balle dans zone collecteur
                 partition = 15
