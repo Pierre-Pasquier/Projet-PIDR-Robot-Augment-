@@ -232,6 +232,7 @@ def recherche(node_id):
 
 
 def detect_circles(frame):
+    global balle_detectee,balle,active_cam
     # Conversion en niveaux de gris
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
