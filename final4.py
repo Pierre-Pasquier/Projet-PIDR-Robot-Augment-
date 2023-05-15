@@ -159,7 +159,7 @@ def retour(node_id):
         DepartLigneNoire = 0
         print("On pose la balle")
         balle = 0
-        if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1]
+        if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1] :
             th[node_id]["motor.left.target"] = -200
             th[node_id]["motor.right.target"] = 200
         else :
