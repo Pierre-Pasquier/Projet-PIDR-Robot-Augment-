@@ -403,7 +403,7 @@ while True:
                         attraper_balle()
                         break
             elif balle_detectee == 0 :
-                    th.set_variable_observer(id, tourner_droite)
+                th.set_variable_observer(id, tourner_droite)
             else :
                 th.set_variable_observer(id, tourner_droite)
                 active_cam = 1
@@ -420,7 +420,7 @@ while True:
     if balle == 1 :
 
         while not active_cam :
-            th.set_variable_observer(node_id,retour)
+            th.set_variable_observer(id,retour)
 
 
 
