@@ -247,6 +247,16 @@ GPIO.setup(Forward, GPIO.OUT)
 GPIO.setup(Backward, GPIO.OUT)
 GPIO.setup(Switch, GPIO.OUT)
 
+SuiviLigne=0
+Vitesse=30
+murinf = 700
+mursup = 800
+noirsup = 200
+grisinf = 400
+grissup = 650
+ligne_grise = 0
+DepartLigneNoire = 0
+
 # initialisation pour thymio
 port = "/dev/ttyACM0"
 
@@ -261,7 +271,6 @@ vitesse_tourne = 5
 
 balle = 0
 
-Vitesse = 30
 
 while True:
     active_cam = 0
