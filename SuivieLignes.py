@@ -80,46 +80,30 @@ def tourner_gauche(node_id):
     th[node_id]["motor.right.target"] = vitesse_tourne
 
 def on():
-    GPIO.output(Switch, GPIO.HIGH)
+    GPIO.output(16, GPIO.HIGH)
 def off():
-    GPIO.output(Switch, GPIO.LOW)
+    GPIO.output(16, GPIO.LOW)
 
 
 
 def attraper_balle():
     global balle
-    Forward=26
-    Backward=20
-    Switch=16
-
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(Forward, GPIO.OUT)
-    GPIO.setup(Backward, GPIO.OUT)
-    GPIO.setup(Switch, GPIO.OUT)
     on()
-    GPIO.output(Forward,GPIO.HIGH)
+    GPIO.output(26,GPIO.HIGH)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
-    GPIO.output(Forward,GPIO.LOW)
+    GPIO.output(26,GPIO.LOW)
     balle = 1
     off()
     GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
 
 def relacher_balle():
     global balle
-    Forward=26
-    Backward=20
-    Switch=16
-
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(Forward, GPIO.OUT)
-    GPIO.setup(Backward, GPIO.OUT)
-    GPIO.setup(Switch, GPIO.OUT)
     on()
-    GPIO.output(Forward,GPIO.LOW)
+    GPIO.output(20,GPIO.HIGH)
     print("Balle attrapée")
     time.sleep(1)   #à voir si on garde
-    GPIO.output(Forward,GPIO.HIGH)
+    GPIO.output(20,GPIO.LOW)
     balle = 0
     off()
     GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
@@ -255,7 +239,13 @@ GPIO.cleanup()
 
 
 
-
+Forward=26
+Backward=20
+Switch=16
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(Forward, GPIO.OUT)
+GPIO.setup(Backward, GPIO.OUT)
+GPIO.setup(Switch, GPIO.OUT)
 
 # initialisation pour thymio
 port = "/dev/ttyACM0"
