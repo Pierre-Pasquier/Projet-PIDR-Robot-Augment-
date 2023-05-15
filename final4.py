@@ -255,7 +255,7 @@ def detect_circles(frame):
 
         balle_detectee = 1
         print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        circles_det = circles[0]
+        circles_det = circles
         print(circles_det[0][0], circles_det[0][1], circles_det[0][2])  # x,y,r
         pix_rouge = frame[int(circles_det[0][1])][int(circles_det[0][0])][2]
         pix_vert = frame[int(circles_det[0][1])][int(circles_det[0][0])][1]
