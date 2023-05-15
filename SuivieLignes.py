@@ -112,8 +112,8 @@ def relacher_balle():
 
 
 def retour(node_id):
-	global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire
-	print(th[node_id]["prox.ground.reflected"][0])
+    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire
+    print(th[node_id]["prox.ground.reflected"][0])
 
     th[node_id]["motor.left.target"]=Vitesse
     th[node_id]["motor.right.target"]=Vitesse
