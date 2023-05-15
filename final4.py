@@ -154,7 +154,7 @@ def retour(node_id):
             th[node_id]["motor.left.target"] = 0
 
     #on est arrivé au bout de la ligne
-    if th[node_id]["prox.ground.reflected"][0]> murinf and th[node_id]["prox.ground.reflected"][1]>murinf and SuiviLigne==1:
+    if th[node_id]["prox.ground.reflected"][0]> grisinf and th[node_id]["prox.ground.reflected"][1]>grisinf and SuiviLigne==1:
         SuiviLigne=0
         DepartLigneNoire = 0
         print("On pose la balle")
@@ -328,8 +328,8 @@ Vitesse=30
 murinf = 700
 mursup = 800
 noirsup = 200
-grisinf = 400
-grissup = 650
+grisinf = 200
+grissup = 450
 ligne_grise = 0
 DepartLigneNoire = 0
 
