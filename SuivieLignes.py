@@ -4,6 +4,7 @@ from collections import deque
 import thymiodirect
 from thymiodirect import Connection
 from thymiodirect import Thymio
+from time import sleep
 
 import numpy as np
 
