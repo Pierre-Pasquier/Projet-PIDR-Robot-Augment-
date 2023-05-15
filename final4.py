@@ -368,7 +368,7 @@ while True:
         output_frame = detect_circles(frame)
 
 
-        cv.imshow('frame', output)
+        cv.imshow('frame', frame)
 
         # Press Q on keyboard to stop
         if cv.waitKey(1) & 0xFF == ord('q'):
