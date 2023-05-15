@@ -17,7 +17,7 @@ def detect_circles(frame):
         circles = np.round(circles[0, :]).astype("int")
 
         # Dessiner les cercles détectés sur l'image
-        for (x, y, r) in circles[0]:
+        for (x, y, r) in circles:
             cv2.circle(frame, (x, y), r, (0, 255, 0), 4)
 
     return frame
