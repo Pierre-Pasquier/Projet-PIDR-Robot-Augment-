@@ -393,9 +393,6 @@ while True:
                         print(None, None, None)
                         th.set_variable_observer(id, tourner_droite)
                         print("Rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien, rien")
-            elif balle_detectee == 0 :
-                    th.set_variable_observer(id, tourner_droite)
-
 #Si balle dans zone collecteur
                 partition = 15
                 for k in range(1,partition):
@@ -405,6 +402,8 @@ while True:
                     if pix_rouge_bas > 1.7 * pix_vert_bas and pix_rouge_bas > 1.7 * pix_bleu_bas : #and balle == 0 :  # valeurs à tester
                         attraper_balle()
                         break
+            elif balle_detectee == 0 :
+                    th.set_variable_observer(id, tourner_droite)
             else :
                 th.set_variable_observer(id, tourner_droite)
                 active_cam = 1
