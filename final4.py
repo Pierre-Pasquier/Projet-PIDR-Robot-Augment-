@@ -372,8 +372,8 @@ while True:
             facteur_couleur = 0.1
             # compare to the previoussly detected circle
             if circles is not None:
-                for circles_det in circle:
-                    drawer(output, old_circle)
+                for circle in circles_det:
+                    drawer(output, circle)
 
                     writer(output, "Fps={:06.2f}".format(fps()))
                     cv.imshow('frame', output)
