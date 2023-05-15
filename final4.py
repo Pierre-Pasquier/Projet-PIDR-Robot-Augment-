@@ -377,7 +377,7 @@ while True:
 
                     writer(output, "Fps={:06.2f}".format(fps()))
                     cv.imshow('frame', output)
-                circles_det = circles_det[0]
+                circles_det = circles[0]
                 balle_detectee = 1
                 print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 circles_det = circles_det[0]
