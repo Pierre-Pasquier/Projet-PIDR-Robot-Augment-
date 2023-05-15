@@ -233,13 +233,13 @@ def recherche(node_id):
 
 def detect_circles(frame):
     # Conversion en niveaux de gris
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Réduction du bruit avec un flou gaussien
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    blur = cv.GaussianBlur(gray, (5, 5), 0)
 
     # Détection des cercles avec la transformée de Hough
-    circles = cv2.HoughCircles(blur, cv2.HOUGH_GRADIENT, dp=1, minDist=1000000, param1=50, param2=30, minRadius=0, maxRadius=100)
+    circles = cv.HoughCircles(blur, cv2.HOUGH_GRADIENT, dp=1, minDist=1000000, param1=50, param2=30, minRadius=0, maxRadius=100)
 
     facteur_couleur = 0.1
             # compare to the previoussly detected circle
@@ -249,7 +249,7 @@ def detect_circles(frame):
 
         # Dessiner les cercles détectés sur l'image
         for (x, y, r) in circles:
-            cv2.circle(frame, (x, y), r, (0, 255, 0), 4)
+            cv.circle(frame, (x, y), r, (0, 255, 0), 4)
 
 
         balle_detectee = 1
@@ -348,7 +348,7 @@ vitesse_tourne = 5
 balle = 0
 
 # Capture vidéo en direct
-video_capture = cv2.VideoCapture(0)
+video_capture = cv.VideoCapture(0)
 
 while True:
     active_cam = 0
