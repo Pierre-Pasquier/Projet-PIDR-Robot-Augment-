@@ -193,7 +193,7 @@ def retour(node_id):
 
     if balle == 0 :
         print("Dans recherche")
-
+        print(ligne_grise,start-time.time())
 
         th[node_id]["motor.left.target"]=Vitesse
         th[node_id]["motor.right.target"]=Vitesse
