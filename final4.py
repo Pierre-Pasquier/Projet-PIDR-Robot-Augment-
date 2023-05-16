@@ -192,6 +192,8 @@ def retour(node_id):
             #on repassera en mode random pour ne plus prendre en compte les lignes noires au sol et chercher les lignes grises
 
     if balle == 0 :
+        if start == 0 :
+            start = time.time()
         print("Dans recherche")
         print(ligne_grise,start-time.time())
 
@@ -209,7 +211,7 @@ def retour(node_id):
 
 
         #on a trouvé une ligne grise
-        if th[node_id]["prox.ground.reflected"][0]> grisinf  and th[node_id]["prox.ground.reflected"][0]< grissup  or th[node_id]["prox.ground.reflected"][1]> grisinf  and th[node_id]["prox.ground.reflected"][1]< grissup:
+        if (th[node_id]["prox.ground.reflected"][0]> grisinf  and th[node_id]["prox.ground.reflected"][0]< grissup)  or (th[node_id]["prox.ground.reflected"][1]> grisinf  and th[node_id]["prox.ground.reflected"][1]< grissup) :
             ligne_grise = 1
             #si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
             if (th[node_id]["prox.ground.reflected"][0]> grisinf  and th[node_id]["prox.ground.reflected"][0]<grissup) and (th[node_id]["prox.ground.reflected"][1]< grisinf  or  th[node_id]["prox.ground.reflected"][1]> grissup):
@@ -227,8 +229,6 @@ def retour(node_id):
             sleep(1)
             #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
             if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
-                if start == 0 :
-                    start = time.time()
                 if time.time() - start > 5000 :#on detecte pas de balle :
                     print("On tourne")
                     active_cam = 1
@@ -244,8 +244,6 @@ def retour(node_id):
             sleep(1)
             #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
             if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
-                    if start == 0 :
-                        start = time.time()
                     if time.time() - start > 5000 :#on detecte pas de balle :
                         print("On tourne")
                         active_cam = 1
