@@ -360,7 +360,7 @@ murinf = 700
 mursup = 800
 noirsup = 200
 grisinf = 300
-grissup =400
+grissup =500
 ligne_grise = 0
 DepartLigneNoire = 0
 
