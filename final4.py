@@ -82,7 +82,7 @@ def tourner_gauche(node_id):
 
 def on():
     GPIO.output(16, GPIO.HIGH)
-    
+
 def off():
     GPIO.output(16, GPIO.LOW)
 
@@ -114,9 +114,22 @@ def relacher_balle():
 
 
 def retour(node_id):
-    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse,start,active_cam
+    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse,start,active_cam,tourne
 
     print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
+
+    if tourne == 1 :
+        print("aaaaaaaaaaaa",th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
+        if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
+            th[node_id]["motor.left.target"] = -200
+            th[node_id]["motor.right.target"] = 200
+        else :
+            th[node_id]["motor.left.target"] = 200
+            th[node_id]["motor.right.target"] = -200
+
+        sleep(1)
+        #on dépose la boule
+        print("Appel recherche")
 
     if balle == 1 :
 
@@ -173,17 +186,8 @@ def retour(node_id):
             th[node_id]["motor.left.target"] = 0
             th[node_id]["motor.right.target"] = 0
             sleep(5)
-            print("aaaaaaaaaaaa",th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
-            if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
-                th[node_id]["motor.left.target"] = -200
-                th[node_id]["motor.right.target"] = 200
-            else :
-                th[node_id]["motor.left.target"] = 200
-                th[node_id]["motor.right.target"] = -200
+            tourne = 1
 
-            sleep(1)
-            #on dépose la boule
-            print("Appel recherche")
             #on repassera en mode random pour ne plus prendre en compte les lignes noires au sol et chercher les lignes grises
 
     if balle == 0 :
@@ -364,7 +368,8 @@ vitesse_tourne = 75
 
 balle = 0
 
-start = 0
+
+
 
 # Capture vidéo en direct
 video_capture = cv.VideoCapture(0)
@@ -372,6 +377,8 @@ video_capture = cv.VideoCapture(0)
 while True:
     active_cam = 0
     balle_detectee = 0
+    start = 0
+    tourne = 0
 
 
     while balle == 0:
@@ -397,8 +404,6 @@ while True:
 
         while not active_cam :
             th.set_variable_observer(id,retour)
-            print(active_cam)
-            sleep(1)
         print("bbbbbbb")
 
 
