@@ -382,9 +382,9 @@ balle = 1
 
 
 # Capture vidéo en direct
-video_capture = cv.VideoCapture(0)
 
 while True:
+    video_capture = cv.VideoCapture(0)
     active_cam = 0
     balle_detectee = 0
     start = 0
