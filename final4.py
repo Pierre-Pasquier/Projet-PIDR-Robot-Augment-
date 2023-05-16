@@ -137,7 +137,7 @@ def retour(node_id):
             DepartLigneNoire += 1
             if DepartLigneNoire == 1:
                 th[node_id]["motor.left.target"] = 30
-                th[node_id]["motor.right.target"] = -30
+                th[node_id]["motor.right.target"] = 0
                 print("aaaaaaaaaaaaaa")
                 sleep(3)
 
