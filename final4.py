@@ -113,7 +113,7 @@ def relacher_balle():
 
 
 def retour(node_id):
-    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse
+    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse,active_cam
 
     print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
 
