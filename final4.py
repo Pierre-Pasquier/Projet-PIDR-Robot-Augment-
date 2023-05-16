@@ -114,7 +114,7 @@ def relacher_balle():
 
 def retour(node_id):
     global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse
-    print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][0])
+    print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1])
 
     th[node_id]["motor.left.target"]=Vitesse
     th[node_id]["motor.right.target"]=Vitesse
@@ -134,12 +134,12 @@ def retour(node_id):
     #on a trouvé une ligne noire
     if th[node_id]["prox.ground.reflected"][0]< noirsup or th[node_id]["prox.ground.reflected"][1]< noirsup :
         if th[node_id]["prox.ground.reflected"][0]< noirsup and th[node_id]["prox.ground.reflected"][1]< noirsup :
-            DepartLigneNoire += 1
-            if DepartLigneNoire == 1:
-                th[node_id]["motor.left.target"] = 30
-                th[node_id]["motor.right.target"] = -30
-                print("aaaaaaaaaaaaaa")
-                sleep(3)
+            # DepartLigneNoire += 1
+            # if DepartLigneNoire == 1:
+            #     th[node_id]["motor.left.target"] = 30
+            #     th[node_id]["motor.right.target"] = -30
+            #     print("aaaaaaaaaaaaaa")
+            #     sleep(3)
 
         #print(th[node_id]["prox.ground.reflected"][0])
         #moyen de savoir qu'on viens d'une ligne
