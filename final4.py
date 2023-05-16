@@ -150,8 +150,8 @@ def retour(node_id):
                 th[node_id]["motor.right.target"]=Vitesse*3
                 
          if th[node_id]["prox.ground.reflected"][0] > murinf and th[node_id]["prox.ground.reflected"][1] > murinf and SuiviLigne == 1 :
-            th[node_id]["motor.right.target"]= -150
-            sleep(2)
+             th[node_id]["motor.right.target"]= -150
+             sleep(2)
 
 
 
