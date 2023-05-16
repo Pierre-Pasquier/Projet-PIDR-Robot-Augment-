@@ -203,7 +203,7 @@ def retour(node_id):
 
             #on repassera en mode random pour ne plus prendre en compte les lignes noires au sol et chercher les lignes grises
 
-    if balle == 0 and balle == 0:
+    if balle == 0 and tourne == 0:
         if start == 0 :
             start = time.time()
         print("Dans recherche")
