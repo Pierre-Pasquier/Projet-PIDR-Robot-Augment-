@@ -113,7 +113,7 @@ def relacher_balle():
 
 
 def retour(node_id):
-    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse
+    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse,Passagedroit,Passagegauche
     print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][0])
 
     th[node_id]["motor.left.target"]=Vitesse
@@ -144,27 +144,37 @@ def retour(node_id):
         #print(th[node_id]["prox.ground.reflected"][0])
         #moyen de savoir qu'on viens d'une ligne
         SuiviLigne=1
+    if th[node_id]["prox.ground.reflected"][0]< noirsup :
+	Passagegauche=1
+
+    if th[node_id]["prox.ground.reflected"][0]> noirsup and Passagegauche=1:
+	Passagegauche=2
+
+    if th[node_id]["prox.ground.reflected"][1]< noirsup :
+	Passagedroit=1
+
+    if th[node_id]["prox.ground.reflected"][1]> noirsup and Passagedroit=1:
+	Passagedroit=2
 
         #on dévie à gauche
-        if th[node_id]["prox.ground.reflected"][0]> noirsup :
-            th[node_id]["motor.right.target"] = 0
+    if th[node_id]["prox.ground.reflected"][0]< noirsup and (Passagegauche=2 or Passagedroit=2):
+        th[node_id]["motor.right.target"] = 0
 
         #on dévie à droite
-        elif th[node_id]["prox.ground.reflected"][1]> noirsup :
-            th[node_id]["motor.left.target"] = 0
+    elif th[node_id]["prox.ground.reflected"][1]< noirsup and (Passagegauche=2 or Passagedroit=2):
+        th[node_id]["motor.left.target"] = 0
 
     #on est arrivé au bout de la ligne
-    if th[node_id]["prox.ground.reflected"][0]> grisinf and th[node_id]["prox.ground.reflected"][1]>grisinf and SuiviLigne==1:
+    if th[node_id]["prox.ground.reflected"][0]< grissup and th[node_id]["prox.ground.reflected"][1]<grissup and SuiviLigne==1:
         SuiviLigne=0
         DepartLigneNoire = 0
+	Passagedroit=0
+	Passagegauche=0
         print("On pose la balle")
         balle = 0
-        if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1] :
-            th[node_id]["motor.left.target"] = -200
-            th[node_id]["motor.right.target"] = 200
-        else :
-            th[node_id]["motor.left.target"] = 200
-            th[node_id]["motor.right.target"] = -200
+        th[node_id]["motor.left.target"] = 200
+        th[node_id]["motor.right.target"] = -200
+  
 
         sleep(1)
         #on dépose la boule
