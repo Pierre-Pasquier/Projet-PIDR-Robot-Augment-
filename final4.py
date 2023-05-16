@@ -154,7 +154,7 @@ def retour(node_id):
             th[node_id]["motor.left.target"] = 0
 
     #on est arrivé au bout de la ligne
-    if th[node_id]["prox.ground.reflected"][0] < grissup and th[node_id]["prox.ground.reflected"][1]<grissup and SuiviLigne==1:
+    if th[node_id]["prox.ground.reflected"][0] < grissup and th[node_id]["prox.ground.reflected"][1]<grissup and th[node_id]["prox.ground.reflected"][0]>grisinf and th[node_id]["prox.ground.reflected"][1]>grisinf and SuiviLigne==1:
         SuiviLigne=0
         DepartLigneNoire = 0
         print("On pose la balle")
@@ -210,7 +210,7 @@ def recherche(node_id):
         th[node_id]["motor.left.target"] = Vitesse
         sleep(1)
         #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
-        if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
+        if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf and :
             if True :#on detecte pas de balle :
                 print("On tourne")
                 active_cam = 1
