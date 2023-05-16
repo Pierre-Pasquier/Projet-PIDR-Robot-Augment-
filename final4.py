@@ -153,6 +153,7 @@ def retour(node_id):
             th[node_id]["motor.right.target"]= -150
             sleep(2)
             th[node_id]["motor.right.target"]=Vitesse
+            SuiviLigne = 0
 
 
 
