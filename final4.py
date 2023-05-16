@@ -378,7 +378,7 @@ id = th.first_node()
 vitesse_avance = 150
 vitesse_tourne = 75
 
-balle = 0
+balle = 1
 
 
 
