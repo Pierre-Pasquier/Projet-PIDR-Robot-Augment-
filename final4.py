@@ -130,7 +130,7 @@ def retour(node_id):
         sleep(1.3)
         th[node_id]["motor.left.target"] = 200
         th[node_id]["motor.right.target"] = 200
-        sleep(1)
+        sleep(0.8)
         #on dépose la boule
         print("Appel recherche")
         tourne = 0
@@ -355,7 +355,7 @@ GPIO.setup(Backward, GPIO.OUT)
 GPIO.setup(Switch, GPIO.OUT)
 
 SuiviLigne=0
-Vitesse=100
+Vitesse=60
 murinf = 700
 mursup = 800
 noirsup = 200
