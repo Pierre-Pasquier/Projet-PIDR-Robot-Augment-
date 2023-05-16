@@ -330,6 +330,8 @@ def detect_circles(frame):
     elif balle_detectee == 0 :
         th.set_variable_observer(id, tourner_droite)
         active_cam = 1
+        video_capture.release()
+        cv2.destroyAllWindows()
 
     return frame
 
