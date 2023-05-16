@@ -345,7 +345,7 @@ id = th.first_node()
 vitesse_avance = 150
 vitesse_tourne = 75
 
-balle = 0
+balle = 1
 
 # Capture vidéo en direct
 video_capture = cv.VideoCapture(0)
