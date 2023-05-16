@@ -168,8 +168,8 @@ def retour(node_id):
     if th[node_id]["prox.ground.reflected"][0]< grissup and th[node_id]["prox.ground.reflected"][1]<grissup and SuiviLigne==1:
         SuiviLigne=0
         DepartLigneNoire = 0
-	Passagedroit=0
-	Passagegauche=0
+        Passagedroit=0
+        Passagegauche=0
         print("On pose la balle")
         balle = 0
         th[node_id]["motor.left.target"] = 200
@@ -342,6 +342,9 @@ grisinf = 350
 grissup =600
 ligne_grise = 0
 DepartLigneNoire = 0
+
+Passagedroit = 0
+Passagegauche = 0
 
 # initialisation pour thymio
 port = "/dev/ttyACM0"
