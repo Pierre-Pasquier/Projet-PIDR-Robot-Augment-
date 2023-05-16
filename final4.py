@@ -159,10 +159,13 @@ def retour(node_id):
         if th[node_id]["prox.ground.reflected"][0] < grissup and th[node_id]["prox.ground.reflected"][1]<grissup and th[node_id]["prox.ground.reflected"][0]>grisinf and th[node_id]["prox.ground.reflected"][1]>grisinf and SuiviLigne==1:
             SuiviLigne=0
             DepartLigneNoire = 0
+            th[node_id]["motor.left.target"] = 0
+            th[node_id]["motor.right.target"] = 0
             print("On pose la balle")
+            th.set_variable_observer(id, relacher_balle)
             balle = 0
-            th[node_id]["motor.left.target"] = 50
-            th[node_id]["motor.right.target"] = 50
+            th[node_id]["motor.left.target"] = 100
+            th[node_id]["motor.right.target"] = 100
             sleep(1)
             if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1] :
                 th[node_id]["motor.left.target"] = -200
