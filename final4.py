@@ -80,7 +80,8 @@ def tourner_gauche(node_id):
     th[node_id]["motor.left.target"] = 0 #valeur potentiellement à modifier
     th[node_id]["motor.right.target"] = vitesse_tourne
 
-#def on():
+def on():
+    GPIO.output(16, GPIO.HIGH)
     
 def off():
     GPIO.output(16, GPIO.LOW)
