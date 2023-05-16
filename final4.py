@@ -133,7 +133,7 @@ def retour(node_id):
 
     #on a trouvé une ligne noire
     if th[node_id]["prox.ground.reflected"][0]< noirsup or th[node_id]["prox.ground.reflected"][1]< noirsup :
-        if th[node_id]["prox.ground.reflected"][0]< noirsup and th[node_id]["prox.ground.reflected"][1]< noirsup :
+        #if th[node_id]["prox.ground.reflected"][0]< noirsup and th[node_id]["prox.ground.reflected"][1]< noirsup :
             # DepartLigneNoire += 1
             # if DepartLigneNoire == 1:
             #     th[node_id]["motor.left.target"] = 30
