@@ -118,22 +118,24 @@ def retour(node_id):
 
     print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
 
-    if tourne == 1 :
-        print("aaaaaaaaaaaa",th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
-        if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
-            th[node_id]["motor.left.target"] = -200
-            th[node_id]["motor.right.target"] = 200
-        else :
-            th[node_id]["motor.left.target"] = 200
-            th[node_id]["motor.right.target"] = -200
+    if tourne >= 1 :
+        tourne += 1
+        if tourne == 3 :
+            print("aaaaaaaaaaaa",th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
+            if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
+                th[node_id]["motor.left.target"] = -200
+                th[node_id]["motor.right.target"] = 200
+            else :
+                th[node_id]["motor.left.target"] = 200
+                th[node_id]["motor.right.target"] = -200
 
-        sleep(1.3)
-        th[node_id]["motor.left.target"] = 200
-        th[node_id]["motor.right.target"] = 200
-        sleep(1)
-        #on dépose la boule
-        print("Appel recherche")
-        tourne = 0
+            sleep(1.3)
+            th[node_id]["motor.left.target"] = 200
+            th[node_id]["motor.right.target"] = 200
+            sleep(1)
+            #on dépose la boule
+            print("Appel recherche")
+            tourne = 0
 
     if balle == 1 :
 
