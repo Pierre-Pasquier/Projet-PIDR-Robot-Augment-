@@ -120,7 +120,7 @@ def retour(node_id):
 
     if tourne == 1 :
         print("aaaaaaaaaaaa",th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
-        if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
+        if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1] :
             th[node_id]["motor.left.target"] = -200
             th[node_id]["motor.right.target"] = 200
         else :
