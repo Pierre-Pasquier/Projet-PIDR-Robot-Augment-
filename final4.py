@@ -116,124 +116,123 @@ def retour(node_id):
     global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse
     print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1])
 
-    th[node_id]["motor.left.target"]=Vitesse
-    th[node_id]["motor.right.target"]=Vitesse
+    if balle == 1 :
+
+        th[node_id]["motor.left.target"]=Vitesse
+        th[node_id]["motor.right.target"]=Vitesse
 
 
-    #on gere les murs avec le onevent et la couleur aus sol entre 400 et 600
-    if th[node_id]["prox.ground.reflected"][0]> murinf and  th[node_id]["prox.ground.reflected"][0]< mursup :
-            th[node_id]["motor.left.target"]= Vitesse*3
+        #on gere les murs avec le onevent et la couleur aus sol entre 400 et 600
+        if th[node_id]["prox.ground.reflected"][0]> murinf and  th[node_id]["prox.ground.reflected"][0]< mursup :
+                th[node_id]["motor.left.target"]= Vitesse*3
 
 
-    if th[node_id]["prox.ground.reflected"][1]> murinf and  th[node_id]["prox.ground.reflected"][1]< mursup :
-            th[node_id]["motor.right.target"]=Vitesse*3
+        if th[node_id]["prox.ground.reflected"][1]> murinf and  th[node_id]["prox.ground.reflected"][1]< mursup :
+                th[node_id]["motor.right.target"]=Vitesse*3
 
 
 
 
-    #on a trouvé une ligne noire
-    if th[node_id]["prox.ground.reflected"][0]< noirsup or th[node_id]["prox.ground.reflected"][1]< noirsup :
-        DepartLigneNoire += 1
-        if th[node_id]["prox.ground.reflected"][0]< noirsup and th[node_id]["prox.ground.reflected"][1]< noirsup :
-            if DepartLigneNoire == 5:
-                th[node_id]["motor.left.target"] = 60
+        #on a trouvé une ligne noire
+        if th[node_id]["prox.ground.reflected"][0]< noirsup or th[node_id]["prox.ground.reflected"][1]< noirsup :
+            if th[node_id]["prox.ground.reflected"][0]< noirsup and th[node_id]["prox.ground.reflected"][1]< noirsup :
+                # DepartLigneNoire += 1
+                # if DepartLigneNoire == 1:
+                #     th[node_id]["motor.left.target"] = 30
+                #     th[node_id]["motor.right.target"] = -30
+                #     print("aaaaaaaaaaaaaa")
+                #     sleep(3)
+
+            #print(th[node_id]["prox.ground.reflected"][0])
+            #moyen de savoir qu'on viens d'une ligne
+            SuiviLigne=1
+
+            #on dévie à gauche
+            if th[node_id]["prox.ground.reflected"][0]> noirsup :
                 th[node_id]["motor.right.target"] = 0
-                print("aaaaaaaaaaaaaa")
-                sleep(1.5)
 
-        #print(th[node_id]["prox.ground.reflected"][0])
-        #moyen de savoir qu'on viens d'une ligne
-        SuiviLigne=1
+            #on dévie à droite
+            elif th[node_id]["prox.ground.reflected"][1]> noirsup :
+                th[node_id]["motor.left.target"] = 0
 
-        #on dévie à gauche
-        if th[node_id]["prox.ground.reflected"][0]> noirsup :
-            th[node_id]["motor.right.target"] = 0
+        #on est arrivé au bout de la ligne
+        if th[node_id]["prox.ground.reflected"][0] < grissup and th[node_id]["prox.ground.reflected"][1]<grissup and th[node_id]["prox.ground.reflected"][0]>grisinf and th[node_id]["prox.ground.reflected"][1]>grisinf and SuiviLigne==1:
+            SuiviLigne=0
+            DepartLigneNoire = 0
+            print("On pose la balle")
+            balle = 0
+            th[node_id]["motor.left.target"] = 50
+            th[node_id]["motor.right.target"] = 50
+            sleep(1)
+            if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1] :
+                th[node_id]["motor.left.target"] = -200
+                th[node_id]["motor.right.target"] = 200
+            else :
+                th[node_id]["motor.left.target"] = 200
+                th[node_id]["motor.right.target"] = -200
 
-        #on dévie à droite
-        elif th[node_id]["prox.ground.reflected"][1]> noirsup :
-            th[node_id]["motor.left.target"] = 0
+            sleep(1)
+            #on dépose la boule
+            print("Appel recherche")
+            #on repassera en mode random pour ne plus prendre en compte les lignes noires au sol et chercher les lignes grises
 
-    #on est arrivé au bout de la ligne
-    if th[node_id]["prox.ground.reflected"][0] < grissup and th[node_id]["prox.ground.reflected"][1]<grissup and th[node_id]["prox.ground.reflected"][0]>grisinf and th[node_id]["prox.ground.reflected"][1]>grisinf and SuiviLigne==1:
-        SuiviLigne=0
-        DepartLigneNoire = 0
-        print("On pose la balle")
-        balle = 0
-        if th[node_id]["prox.ground.reflected"][0] > th[node_id]["prox.ground.reflected"][1] :
-            th[node_id]["motor.left.target"] = -200
-            th[node_id]["motor.right.target"] = 200
-        else :
-            th[node_id]["motor.left.target"] = 200
-            th[node_id]["motor.right.target"] = -200
-
-        sleep(1)
-        #on dépose la boule
-        print("Appel recherche")
-        th.set_variable_observer(node_id,recherche)
-        #on repassera en mode random pour ne plus prendre en compte les lignes noires au sol et chercher les lignes grises
+    if balle == 0 :
+        print("Dans recherche")
 
 
+        th[node_id]["motor.left.target"]=Vitesse
+        th[node_id]["motor.right.target"]=Vitesse
 
+        #on gere les murs avec le onevent et la couleur aus sol entre 400 et 600
+        if th[node_id]["prox.ground.reflected"][0]> murinf and  th[node_id]["prox.ground.reflected"][0]< mursup :
+                th[node_id]["motor.left.target"] = Vitesse*3
 
-def recherche(node_id):
-	#quand ou a pas la boule :
-    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,active_cam,Vitesse
-    print("Dans recherche")
-
-
-    th[node_id]["motor.left.target"]=Vitesse
-    th[node_id]["motor.right.target"]=Vitesse
-
-    #on gere les murs avec le onevent et la couleur aus sol entre 400 et 600
-    if th[node_id]["prox.ground.reflected"][0]> murinf and  th[node_id]["prox.ground.reflected"][0]< mursup :
-            th[node_id]["motor.left.target"] = Vitesse*3
-
-    if th[node_id]["prox.ground.reflected"][1]> murinf and  th[node_id]["prox.ground.reflected"][1]< mursup :
-            th[node_id]["motor.right.target"] = Vitesse*3
+        if th[node_id]["prox.ground.reflected"][1]> murinf and  th[node_id]["prox.ground.reflected"][1]< mursup :
+                th[node_id]["motor.right.target"] = Vitesse*3
 
 
 
 
-    #on a trouvé une ligne grise
-    if th[node_id]["prox.ground.reflected"][0]> grisinf  and th[node_id]["prox.ground.reflected"][0]< grissup  or th[node_id]["prox.ground.reflected"][1]> grisinf  and th[node_id]["prox.ground.reflected"][1]< grissup:
-        ligne_grise = 1
+        #on a trouvé une ligne grise
+        if th[node_id]["prox.ground.reflected"][0]> grisinf  and th[node_id]["prox.ground.reflected"][0]< grissup  or th[node_id]["prox.ground.reflected"][1]> grisinf  and th[node_id]["prox.ground.reflected"][1]< grissup:
+            ligne_grise = 1
+            #si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
+            if (th[node_id]["prox.ground.reflected"][0]> grisinf  and th[node_id]["prox.ground.reflected"][0]<grissup) and (th[node_id]["prox.ground.reflected"][1]< grisinf  or  th[node_id]["prox.ground.reflected"][1]> grissup):
+                th[node_id]["motor.left.target"] = 0
+
+
+            elif (th[node_id]["prox.ground.reflected"][1]> grisinf  and  th[node_id]["prox.ground.reflected"][1]< grissup) and (th[node_id]["prox.ground.reflected"][0]< grisinf  or th[node_id]["prox.ground.reflected"][0]> grissup) :
+                th[node_id]["motor.right.target"] = 0
+
+
+
+            #si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
+        elif th[node_id]["prox.ground.reflected"][0]<grisinf and ligne_grise == 1 :
+            th[node_id]["motor.left.target"] = Vitesse
+            sleep(1)
+            #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
+            if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
+                if True :#on detecte pas de balle :
+                    print("On tourne")
+                    active_cam = 1
+            else :
+                th[node_id]["motor.right.target"] = Vitesse*2
+
+            #on se dirige vers la boule et une fois qu’on l’a on passe en mode recherche de ligne noires
+
+
         #si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
-        if (th[node_id]["prox.ground.reflected"][0]> grisinf  and th[node_id]["prox.ground.reflected"][0]<grissup) and (th[node_id]["prox.ground.reflected"][1]< grisinf  or  th[node_id]["prox.ground.reflected"][1]> grissup):
-            th[node_id]["motor.left.target"] = 0
+        elif th[node_id]["prox.ground.reflected"][1]<grisinf and ligne_grise == 1:
+            th[node_id]["motor.right.target"] = Vitesse
+            sleep(1)
+            #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
+            if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
+                    active_cam = 1
 
+            else :
+                th[node_id]["motor.left.target"] =Vitesse*2
 
-        elif (th[node_id]["prox.ground.reflected"][1]> grisinf  and  th[node_id]["prox.ground.reflected"][1]< grissup) and (th[node_id]["prox.ground.reflected"][0]< grisinf  or th[node_id]["prox.ground.reflected"][0]> grissup) :
-            th[node_id]["motor.right.target"] = 0
-
-
-
-        #si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
-    elif th[node_id]["prox.ground.reflected"][0]<grisinf and ligne_grise == 1 :
-        th[node_id]["motor.left.target"] = Vitesse
-        sleep(1)
-        #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
-        if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
-            if True :#on detecte pas de balle :
-                print("On tourne")
-                active_cam = 1
-        else :
-            th[node_id]["motor.right.target"] = Vitesse*2
-
-        #on se dirige vers la boule et une fois qu’on l’a on passe en mode recherche de ligne noires
-
-
-    #si on a du blanc on test juste d'accélerer un peu du cote opposé pour voir si il chope rapidement du blanc : si oui alors on est au bout de la ligne gris, sinon c'est juste une simple deviation légère
-    elif th[node_id]["prox.ground.reflected"][1]<grisinf and ligne_grise == 1:
-        th[node_id]["motor.right.target"] = Vitesse
-        sleep(1)
-        #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
-        if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
-                active_cam = 1
-
-        else :
-            th[node_id]["motor.left.target"] =Vitesse*2
-
-        #on se dirige vers la boule et une fois qu’on l’a on passe en mode recherche de ligne noires
+            #on se dirige vers la boule et une fois qu’on l’a on passe en mode recherche de ligne noires
 
 
 
