@@ -148,6 +148,10 @@ def retour(node_id):
 
         if th[node_id]["prox.ground.reflected"][1]> murinf and  th[node_id]["prox.ground.reflected"][1]< mursup :
                 th[node_id]["motor.right.target"]=Vitesse*3
+                
+         if th[node_id]["prox.ground.reflected"][0] > murinf and th[node_id]["prox.ground.reflected"][1] > murinf and SuiviLigne == 1 :
+            th[node_id]["motor.right.target"]= -150
+            sleep(2)
 
 
 
@@ -155,8 +159,8 @@ def retour(node_id):
         #on a trouvé une ligne noire
         if th[node_id]["prox.ground.reflected"][0]< noirsup or th[node_id]["prox.ground.reflected"][1]< noirsup :
             DepartLigneNoire += 1
-            if th[node_id]["prox.ground.reflected"][0]< noirsup and th[node_id]["prox.ground.reflected"][1]< noirsup :
-                if DepartLigneNoire == 5:
+            if th[node_id]["prox.ground.reflected"][0]< noirsup and th[node_id]["prox.ground.reflected"][1]< noirsup:
+                if DepartLigneNoire == 5 and SuiviLigne == 0 :
                     th[node_id]["motor.left.target"] = 30
                     th[node_id]["motor.right.target"] = -30
                     print("aaaaaaaaaaaaaa")
