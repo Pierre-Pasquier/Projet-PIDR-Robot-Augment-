@@ -164,10 +164,10 @@ def retour(node_id):
             th[node_id]["motor.right.target"] = 0
             sleep(2)
             print("On pose la balle")
-            th.set_variable_observer(id, relacher_balle)
+            relacher_balle()
             balle = 0
-            th[node_id]["motor.left.target"] = 100
-            th[node_id]["motor.right.target"] = 100
+            th[node_id]["motor.left.target"] = 60
+            th[node_id]["motor.right.target"] = 60
             sleep(1)
             if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
                 th[node_id]["motor.left.target"] = -200
