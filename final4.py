@@ -97,19 +97,18 @@ def attraper_balle():
     GPIO.output(26,GPIO.LOW)
     balle = 1
     off()
-    GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
+    #GPIO.cleanup()  à voir si on le laisse ici ou après chaque appel de fonction
 
 def relacher_balle():
     global balle
-    
-    GPIO.output(16, GPIO.HIGH)
+    on()
     GPIO.output(20,GPIO.HIGH)
     print("Balle relachée")
     time.sleep(1)   #à voir si on garde
     GPIO.output(20,GPIO.LOW)
     balle = 0
     off()
-    GPIO.cleanup()  #à voir si on le laisse ici ou après chaque appel de fonction
+    #GPIO.cleanup()  à voir si on le laisse ici ou après chaque appel de fonction
 
 
 
@@ -170,7 +169,7 @@ def retour(node_id):
             balle = 0
             th[node_id]["motor.left.target"] = 60
             th[node_id]["motor.right.target"] = 60
-            sleep(3)
+            sleep(1)
             if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
                 th[node_id]["motor.left.target"] = -200
                 th[node_id]["motor.right.target"] = 200
