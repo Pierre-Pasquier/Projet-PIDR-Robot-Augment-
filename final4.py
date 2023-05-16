@@ -130,6 +130,7 @@ def retour(node_id):
         sleep(1)
         #on dépose la boule
         print("Appel recherche")
+        tourne = 0
 
     if balle == 1 :
 
