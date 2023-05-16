@@ -170,7 +170,7 @@ def retour(node_id):
             balle = 0
             th[node_id]["motor.left.target"] = 60
             th[node_id]["motor.right.target"] = 60
-            sleep(1)
+            sleep(3)
             if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
                 th[node_id]["motor.left.target"] = -200
                 th[node_id]["motor.right.target"] = 200
