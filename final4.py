@@ -170,6 +170,9 @@ def retour(node_id):
             th[node_id]["motor.left.target"] = 60
             th[node_id]["motor.right.target"] = 60
             sleep(1)
+            th[node_id]["motor.left.target"] = 0
+            th[node_id]["motor.right.target"] = 0
+            sleep(5)
             print("aaaaaaaaaaaa",th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
             if th[node_id]["prox.ground.reflected"][0] < th[node_id]["prox.ground.reflected"][1] :
                 th[node_id]["motor.left.target"] = -200
