@@ -327,9 +327,9 @@ SuiviLigne=0
 Vitesse=30
 murinf = 700
 mursup = 800
-noirsup = 200
-grisinf = 200
-grissup = 450
+noirsup = 300
+grisinf = 350
+grissup =600
 ligne_grise = 0
 DepartLigneNoire = 0
 
