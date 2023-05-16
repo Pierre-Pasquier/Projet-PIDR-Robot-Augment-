@@ -113,7 +113,7 @@ def relacher_balle():
 
 
 def retour(node_id):
-    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse,active_cam
+    global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse,start
 
     print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
 
@@ -217,7 +217,9 @@ def retour(node_id):
             sleep(1)
             #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
             if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
-                if True :#on detecte pas de balle :
+                if start == 0 :
+                    start = time.time()
+                if time.time() - start > 5000 :#on detecte pas de balle :
                     print("On tourne")
                     active_cam = 1
             else :
@@ -351,7 +353,9 @@ id = th.first_node()
 vitesse_avance = 150
 vitesse_tourne = 75
 
-balle = 1
+balle = 0
+
+start = 0
 
 # Capture vidéo en direct
 video_capture = cv.VideoCapture(0)
