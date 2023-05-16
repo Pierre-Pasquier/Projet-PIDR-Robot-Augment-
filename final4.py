@@ -81,7 +81,7 @@ def tourner_gauche(node_id):
     th[node_id]["motor.right.target"] = vitesse_tourne
 
 def on():
-    GPIO.output(16, GPIO.HIGH)
+    
 def off():
     GPIO.output(16, GPIO.LOW)
 
@@ -100,9 +100,10 @@ def attraper_balle():
 
 def relacher_balle():
     global balle
-    on()
+    
+    GPIO.output(16, GPIO.HIGH)
     GPIO.output(20,GPIO.HIGH)
-    print("Balle attrapée")
+    print("Balle relachée")
     time.sleep(1)   #à voir si on garde
     GPIO.output(20,GPIO.LOW)
     balle = 0
