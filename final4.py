@@ -168,6 +168,7 @@ def retour(node_id):
 
         sleep(1)
         #on dépose la boule
+        print("Appel recherche")
         th.set_variable_observer(node_id,recherche)
         #on repassera en mode random pour ne plus prendre en compte les lignes noires au sol et chercher les lignes grises
 
@@ -177,6 +178,7 @@ def retour(node_id):
 def recherche(node_id):
 	#quand ou a pas la boule :
     global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,active_cam,Vitesse
+    print("Dans recherche")
 
 
     th[node_id]["motor.left.target"]=Vitesse
