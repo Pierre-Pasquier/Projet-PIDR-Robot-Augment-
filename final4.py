@@ -332,7 +332,7 @@ GPIO.setup(Backward, GPIO.OUT)
 GPIO.setup(Switch, GPIO.OUT)
 
 SuiviLigne=0
-Vitesse=30
+Vitesse=100
 murinf = 700
 mursup = 800
 noirsup = 200
