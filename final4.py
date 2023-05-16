@@ -115,7 +115,7 @@ def relacher_balle():
 def retour(node_id):
     global SuiviLigne,murinf,mursup,noirsup,balle,grisinf,grissup,ligne_grise,DepartLigneNoire,Vitesse
 
-    print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1])
+    print(th[node_id]["prox.ground.reflected"][0],th[node_id]["prox.ground.reflected"][1],active_cam)
 
     if balle == 1 :
 
@@ -384,7 +384,8 @@ while True:
 
         while not active_cam :
             th.set_variable_observer(id,retour)
-            print("aaa")
+            print(active_cam)
+            sleep(1)
         print("bbbbbbb")
 
 
