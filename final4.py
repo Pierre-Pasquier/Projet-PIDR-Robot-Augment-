@@ -230,7 +230,7 @@ def retour(node_id):
             #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
             if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
                 print("ddddddddddddddddddddddddddddddddddddddddddddddddd")
-                if time.time() - start > 5000 :#on detecte pas de balle :
+                if time.time() - start > 5 :#on detecte pas de balle :
                     print("On tourne")
                     active_cam = 1
             else :
