@@ -127,7 +127,7 @@ def retour(node_id):
             th[node_id]["motor.left.target"] = 200
             th[node_id]["motor.right.target"] = -200
 
-        sleep(1.5)
+        sleep(1.3)
         th[node_id]["motor.left.target"] = 200
         th[node_id]["motor.right.target"] = 200
         sleep(1)
@@ -149,14 +149,7 @@ def retour(node_id):
         if th[node_id]["prox.ground.reflected"][1]> murinf and  th[node_id]["prox.ground.reflected"][1]< mursup :
                 th[node_id]["motor.right.target"]=Vitesse*3
 
-        if th[node_id]["prox.ground.reflected"][0] > murinf and th[node_id]["prox.ground.reflected"][1] > murinf and SuiviLigne == 1 :
-            th[node_id]["motor.right.target"]= -150
-            sleep(1.3)
-            th[node_id]["motor.right.target"]=Vitesse
-            SuiviLigne = 0
-
-
-
+        
 
         #on a trouvé une ligne noire
         if th[node_id]["prox.ground.reflected"][0]< noirsup or th[node_id]["prox.ground.reflected"][1]< noirsup :
@@ -179,7 +172,15 @@ def retour(node_id):
             #on dévie à droite
             elif th[node_id]["prox.ground.reflected"][1]> noirsup :
                 th[node_id]["motor.left.target"] = 0
-
+                
+                
+        if th[node_id]["prox.ground.reflected"][0] > murinf and th[node_id]["prox.ground.reflected"][1] > murinf and SuiviLigne == 1 :
+            th[node_id]["motor.right.target"]= -150
+            sleep(1.3)
+            th[node_id]["motor.right.target"]=Vitesse
+            SuiviLigne = 0
+            
+            
         #on est arrivé au bout de la ligne
         if th[node_id]["prox.ground.reflected"][0] < grissup and th[node_id]["prox.ground.reflected"][1]<grissup and th[node_id]["prox.ground.reflected"][0]>grisinf and th[node_id]["prox.ground.reflected"][1]>grisinf and SuiviLigne==1:
             SuiviLigne=0
