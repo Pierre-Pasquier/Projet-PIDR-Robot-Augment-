@@ -210,7 +210,7 @@ def recherche(node_id):
         th[node_id]["motor.left.target"] = Vitesse
         sleep(1)
         #si les deux sont dans le noir alors ça veut dire qu'on est arrive au bout de la ligne grise
-        if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf and :
+        if th[node_id]["prox.ground.reflected"][0]<grisinf and th[node_id]["prox.ground.reflected"][1]<grisinf :
             if True :#on detecte pas de balle :
                 print("On tourne")
                 active_cam = 1
