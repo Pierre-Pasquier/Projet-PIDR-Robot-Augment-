@@ -127,7 +127,7 @@ def retour(node_id):
             th[node_id]["motor.left.target"] = 200
             th[node_id]["motor.right.target"] = -200
 
-        sleep(1.7)
+        sleep(1.5)
         th[node_id]["motor.left.target"] = 200
         th[node_id]["motor.right.target"] = 200
         sleep(1)
