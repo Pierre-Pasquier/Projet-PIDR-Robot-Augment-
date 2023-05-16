@@ -130,7 +130,7 @@ def retour(node_id):
         sleep(1.3)
         th[node_id]["motor.left.target"] = 200
         th[node_id]["motor.right.target"] = 200
-        sleep(0.8)
+        sleep(1)
         #on dépose la boule
         print("Appel recherche")
         tourne = 0
